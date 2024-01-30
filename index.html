@@ -35,7 +35,7 @@
       <h1 id="title"></h1>
       <h3 id="subtitle">Choose your Jhonny!</h3>
       <h4>{{slides[activeIndex].name}}</h4>
-      <div class="carousel-wrapper bordered">
+      <div class="carousel-wrapper bordered" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()">
         <div class="thumbnails-container py-2">
           <div class="thumbnail mt-2" v-for="(slide, i) in slides" :class="{'active' : i == activeIndex}" ref="thumb" @click="goToSlide(i)">
             <img class="thumbnail-img" :src="`./img/${slide.src}`" :alt="`${slide.name} thumb`" />

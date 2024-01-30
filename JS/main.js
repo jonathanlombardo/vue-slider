@@ -40,6 +40,7 @@ const app = createApp({
 
       activeIndex: 0,
       sliderHeight: 0,
+      autoplay: false,
     };
   },
 
@@ -80,6 +81,16 @@ const app = createApp({
       const element = this.$refs.thumb[this.activeIndex];
       element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
     },
+
+    startAutoplay() {
+      this.autoplay = setInterval(() => {
+        this.goToNext();
+      }, 3000);
+    },
+
+    stopAutoplay() {
+      clearInterval(this.autoplay);
+    },
   },
 
   beforeUpdate() {
@@ -106,6 +117,7 @@ const app = createApp({
     element.style.top = `${this.slidesPosition}px`;
 
     this.scrollThumb();
+    this.startAutoplay();
   },
 });
 
