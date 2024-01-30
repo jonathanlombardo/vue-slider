@@ -45,21 +45,15 @@ const app = createApp({
 
   computed: {
     slidesPosition() {
-      this.changeSliderHeight();
-      return `top: ${-1 * this.sliderHeight * this.activeIndex}px`;
+      return -1 * this.sliderHeight * this.activeIndex;
     },
   },
 
   methods: {
     changeSliderHeight() {
-      this.$nextTick(() => {
-        const element = this.$refs.slidesContainer;
-        const height = element.offsetHeight;
-        // element.style.transition = "0s";
-        console.log(this.$refs.slidesContainer);
-        this.sliderHeight = height;
-        // element.style.transition = "var(--sliding-trans)";
-      });
+      const element = this.$refs.slidesContainer;
+      const height = element.offsetHeight;
+      this.sliderHeight = height;
     },
 
     goToNext() {
@@ -84,22 +78,34 @@ const app = createApp({
 
     scrollThumb() {
       const element = this.$refs.thumb[this.activeIndex];
-      console.log(element);
       element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
     },
   },
 
-  updated() {
+  beforeUpdate() {
+    const element = this.$refs.slidesContainer;
+    element.style.transition = "var(--sliding-trans)";
+    element.style.top = `${this.slidesPosition}px`;
     this.scrollThumb();
-    // this.$refs.slidesContainer.style.transition = "var(--sliding-trans)";
+  },
+
+  updated() {
+    const element = this.$refs.slidesContainer;
+    element.style.transition = "0s";
   },
 
   mounted() {
-    window.addEventListener("resize", this.changeSliderHeight);
+    const element = this.$refs.slidesContainer;
+    window.addEventListener("resize", () => {
+      this.changeSliderHeight();
+      element.style.top = `${this.slidesPosition}px`;
+    });
+
+    this.changeSliderHeight();
+    console.log(this.sliderHeight);
+    element.style.top = `${this.slidesPosition}px`;
+
     this.scrollThumb();
-  },
-  unmounted() {
-    window.removeEventListener("resize", this.changeSliderHeight);
   },
 });
 

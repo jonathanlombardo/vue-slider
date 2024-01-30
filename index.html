@@ -41,7 +41,7 @@
             <img class="thumbnail-img" :src="`./img/${slide.src}`" :alt="`${slide.name} thumb`" />
           </div>
         </div>
-        <div ref="slidesContainer" class="slides-container h-100 w-100" :style="slidesPosition">
+        <div ref="slidesContainer" class="slides-container h-100 w-100">
           <img class="slide" v-for="(slide, i) in slides" :src="`./img/${slide.src}`" :alt="`${slide.name} thumb`" />
         </div>
         <div class="arrow-up bordered" @click="goToPrev()"><i class="fa-solid fa-chevron-up"></i></div>
