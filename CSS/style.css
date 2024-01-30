@@ -1,0 +1,142 @@
+/* -- RESET */
+
+body {
+  background-color: antiquewhite;
+}
+
+/* --CUSTOM PROPS */
+
+:root {
+  --text-m: 1.5rem;
+  --space-m: 8px;
+
+  --li-margin: 1em; /* margini lista FontAwesome */
+  --li-width: 1.5em; /* markerwidth lista FontAwesome */
+
+  --main-color: rgba(255, 0, 0, 0.236);
+  --sliding-trans: 0.5s;
+}
+
+/* -- DEBUG */
+
+.db {
+  background-color: rgba(255, 0, 0, 0.236);
+  border: 3px dashed black;
+  background-clip: content-box;
+  /* min-height: 50px; */
+}
+
+.db-content > * {
+  background-color: rgba(255, 0, 0, 0.236);
+  border: 2px dotted black;
+  background-clip: content-box;
+  /* min-height: 50px; */
+}
+
+.db i::after {
+  content: "ℹ️";
+}
+
+/* ---------------------------------------- */
+
+.bordered {
+  /* border: 1px solid black; */
+  border-radius: 15px;
+}
+
+#external-wrapper {
+  height: 100vh;
+  /* overflow: hidden; */
+  gap: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.carousel-wrapper {
+  height: 600px;
+  width: 800px;
+  overflow: hidden;
+
+  display: flex;
+
+  position: relative;
+}
+
+.slides-container {
+  /* overflow: hidden; */
+  position: relative;
+
+  /* top: -600px; */
+  transition: var(--sliding-trans);
+}
+
+.thumbnails-container {
+  height: 100%;
+  width: 20%;
+
+  overflow: auto;
+}
+
+.thumbnail {
+  width: 80%;
+  aspect-ratio: 1;
+
+  overflow: hidden;
+
+  margin: auto;
+  filter: brightness(0.45);
+  cursor: pointer;
+
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.arrow-up,
+.arrow-down {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  z-index: 1;
+
+  font-size: 1.8rem;
+  text-align: center;
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: rgba(250, 235, 215, 0.6);
+  color: black;
+
+  cursor: pointer;
+}
+
+.arrow-up {
+  top: 20px;
+}
+
+.arrow-down {
+  bottom: 20px;
+}
+
+.slide,
+.thumbnail-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.thumbnail:hover {
+  filter: brightness(1);
+}
+
+.thumbnail.active {
+  filter: brightness(1);
+  box-shadow: 0 0 6px 2px #62fb5a;
+}
